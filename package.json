@@ -1,0 +1,43 @@
+{
+  "name": "config-git",
+  "version": "0.0.0",
+  "description": "read or set git config file",
+
+  "bugs": {
+    "url": "yashprit/config-git/issues"
+  },
+  "author": {
+    "url": "yashprit.github.io",
+    "name": "Yashprit",
+    "email": "yashprit@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "yashprit/config-git"
+  },
+  "license": "MIT",
+  "files": [
+    "lib/index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "config-git",
+    "git",
+    "config",
+    "git-config",
+    "local",
+    "system",
+    "global",
+    "parse-git-file"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "bin": {
+    "config-git": "cli.js"
+  }
+}
