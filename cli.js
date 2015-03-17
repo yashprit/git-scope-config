@@ -1,17 +1,26 @@
 #!/usr/bin/env node
 
 'use strict';
-var meow = require('meow');
-var configGit = require('./lib');
 
-var cli = meow({
-  help: [
-    'Usage',
-    '  config-git <input>',
-    '',
-    'Example',
-    '  config-git Unicorn'
-  ].join('\n')
-});
+var
+  args = require('minimist')(process.argv.slice(2)),
+  configGit = require('./');
 
-configGit (cli.input[0]);
+var action = args.a;
+var location = args.l;
+var key = args.k;
+var value = args.v;
+
+console.log(args);
+
+configGit({
+  location: location,
+  action: action
+}).get(key, function(err, data) {
+  console.log(data);
+})
+
+/*var configGit = (location, action);
+configGit.process(key, value, function(err, std) {
+  console.log(std)
+})*/
