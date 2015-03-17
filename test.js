@@ -1,21 +1,35 @@
 'use strict';
 
-var ConfigGit = require('./');
+var
+  test = require('tape'),
+  configGit = require('./');
 
-describe("config git", function() {
-
-  var configGit;
-
-  beforeEach(function() {
-    configGit = new ConfigGit("global");
+test("can set key and value", function(t) {
+  configGit({
+    location: "global"
+  }).set("github.token", "yashp", function(err, data) {
+    t.ok(!err, 'should not have error setting key and value');
+    t.ok(data, 'as such no data');
+    t.end();
   });
+});
 
-  it("should return set value for key", function(done) {
-    configGit.process("github.token", "yash", done)
+test("can get key", function(t) {
+  configGit({
+    location: "global"
+  }).get("github.token", function(err, data) {
+    t.ok(!err, 'should not have error getting key');
+    t.equal(data, "yashp\n", "should be equal");
+    t.end();
   });
+});
 
-  it("should return value of key", function(done) {
-    configGit.process("github.token", done)
+test("can remove key", function(t) {
+  configGit({
+    location: "global"
+  }).unset("github.token", function(err, data) {
+    t.ok(!err, 'should not have error unseting key');
+    t.ok(data, 'as such no data');
+    t.end();
   });
-
-})
+});

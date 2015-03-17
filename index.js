@@ -47,6 +47,13 @@ ConfigGit.Location = {
   SYSTEM: "system"
 }
 
+ConfigGit.Action = {
+  GET: "--get",
+  GET_ALL: "--get-all",
+  UNSET: "--unset",
+  UNSET_ALL: "--unset-all"
+}
+
 /**
  * Read file from given path
  *
@@ -87,14 +94,18 @@ ConfigGit.prototype.sync = function(path) {
  *
  */
 ConfigGit.prototype.get = function get(key, cb) {
-  console.log(this);
   if (this.location === ConfigGit.Location.GLOBAL || this.location === ConfigGit.Location.SYSTEM ||
     this.location === ConfigGit.Location.LOCAL) {
+
+    if (typeof key === "function") {
+      cb = key
+      key = ConfigGit.Action.GET_ALL;
+    }
+
 
     this.commands.push(key);
     var shellCommand = this.commands.join(" ");
     execute(shellCommand, function(err, data) {
-      console.log(data);
       if (err) {
         cb(err);
       }
@@ -119,20 +130,60 @@ ConfigGit.prototype.get = function get(key, cb) {
  *
  */
 ConfigGit.prototype.set = function set(key, value, cb) {
+
+  if (!(typeof key === "string" && typeof value === "string" && typeof cb === "function")) {
+    cb(new Error("Wrong argument provided"));
+  }
+
   if (this.location === ConfigGit.Location.GLOBAL || this.location === ConfigGit.Location.SYSTEM ||
     this.location === ConfigGit.Location.LOCAL) {
 
     this.commands.push(key);
     this.commands.push(value);
     var shellCommand = this.commands.join(" ");
+
     execute(shellCommand, function(err, data) {
       if (err) {
         cb(err);
       }
 
-      if (data) {
-        cb(null, data);
+      if (data === "") {
+        cb(null, true);
       }
+
+    });
+  } else {
+    cb(new Error("mismatch location and name"))
+  }
+}
+
+ConfigGit.prototype.unset = function(key, cb) {
+
+  if (typeof key === "function") {
+    cb = key;
+    key = null;
+  }
+
+  if (this.location === ConfigGit.Location.GLOBAL || this.location === ConfigGit.Location.SYSTEM ||
+    this.location === ConfigGit.Location.LOCAL) {
+
+    if (key) {
+      this.commands.push(ConfigGit.Action.UNSET);
+      this.commands.push(key);
+    } else {
+      this.commands.push(ConfigGit.Action.UNSET_ALL);
+    }
+
+    var shellCommand = this.commands.join(" ");
+    execute(shellCommand, function(err, data) {
+      if (err) {
+        cb(err);
+      }
+
+      if (data === "") {
+        cb(null, true);
+      }
+
     });
   } else {
     cb(new Error("mismatch location and name"))
