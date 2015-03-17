@@ -1,6 +1,6 @@
 {
   "name": "config-git",
-  "version": "0.0.0",
+  "version": "0.0.0alpha",
   "description": "read or set git config file",
   "bugs": {
     "url": "yashprit/config-git/issues"
