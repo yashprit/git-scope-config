@@ -1,6 +1,8 @@
-#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+*work is still in progress*
 
-> read or set git config file
+#  config-git [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+
+> read or set git config from various location like global, system, file, local
 
 
 ## Install
@@ -10,23 +12,55 @@ $ npm install --save config-git
 ```
 
 
-## Usage
+## Example
+
+### JavaScript
 
 ```js
-var config-git = require('config-git');
+var configGit = require('config-git');
 
-config-git('Rainbow');
+configGit({scope: "global"}).set("github.user", "Yashprit Singh", function(err, data){
+  console.log(data); //=> true
+})
+
 ```
+
+### Command Line reference 
 
 ```sh
-$ npm install --global config-git
-$ config-git --help
+$ npm install --g config-git
+$ config-git --scope global --key github.user --value Yashprit Singh
 ```
 
 
-##Report Issue 
-[issue-url]
+## Methods
 
+```js
+var configGit = require("config-git");
+configGit({
+  scope: "global"
+})
+```
+
+### set([key], [value], cb)
+
+Set value for key in defined scope, created by above constructor. e.g. `git config --global github.user Yashprit Singh` 
+
+### get([key], cb)
+
+Get value for key, for above scope. If no key specified than get all key, similar to `--get-all`
+
+### unset([key], cb)
+
+Unset value for given key, if no key specified than unset-all, using `--unset-all`
+
+## Run Test
+```sh
+npm test
+```
+
+## Contribute or Report Issue
+For bugs and feature requests, [please create an issue][issue-url].
 
 ## License
 

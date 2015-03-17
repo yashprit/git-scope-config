@@ -11,7 +11,7 @@ var configuration = {
   action: function(action) {
     return "-- " + action;
   },
-  location: function(loc) {
+  scope: function(loc) {
     return "--" + loc;
   }
 }
@@ -40,7 +40,7 @@ function ConfigGit(opts) {
 /**
  * Static Object acts like constant
  */
-ConfigGit.Location = {
+ConfigGit.Scope = {
   FILE: "file",
   GLOBAL: "global",
   LOCAL: "local",
@@ -64,7 +64,7 @@ ConfigGit.Action = {
  *
  */
 ConfigGit.prototype.execFile = function(path, cb) {
-  if (this.location === ConfigGit.Location.FILE) {
+  if (this.scope === ConfigGit.Scope.FILE) {
 
   } else {
     cb(new Error("mismatch options"))
@@ -94,8 +94,8 @@ ConfigGit.prototype.sync = function(path) {
  *
  */
 ConfigGit.prototype.get = function get(key, cb) {
-  if (this.location === ConfigGit.Location.GLOBAL || this.location === ConfigGit.Location.SYSTEM ||
-    this.location === ConfigGit.Location.LOCAL) {
+  if (this.scope === ConfigGit.Scope.GLOBAL || this.scope === ConfigGit.Scope.SYSTEM ||
+    this.scope === ConfigGit.Scope.LOCAL) {
 
     if (typeof key === "function") {
       cb = key
@@ -115,7 +115,7 @@ ConfigGit.prototype.get = function get(key, cb) {
       }
     });
   } else {
-    cb(new Error("mismatch location and name"))
+    cb(new Error("mismatch scope and name"))
   }
 }
 
@@ -135,8 +135,8 @@ ConfigGit.prototype.set = function set(key, value, cb) {
     cb(new Error("Wrong argument provided"));
   }
 
-  if (this.location === ConfigGit.Location.GLOBAL || this.location === ConfigGit.Location.SYSTEM ||
-    this.location === ConfigGit.Location.LOCAL) {
+  if (this.scope === ConfigGit.Scope.GLOBAL || this.scope === ConfigGit.Scope.SYSTEM ||
+    this.scope === ConfigGit.Scope.LOCAL) {
 
     this.commands.push(key);
     this.commands.push(value);
@@ -153,7 +153,7 @@ ConfigGit.prototype.set = function set(key, value, cb) {
 
     });
   } else {
-    cb(new Error("mismatch location and name"))
+    cb(new Error("mismatch scope and name"))
   }
 }
 
@@ -164,8 +164,8 @@ ConfigGit.prototype.unset = function(key, cb) {
     key = null;
   }
 
-  if (this.location === ConfigGit.Location.GLOBAL || this.location === ConfigGit.Location.SYSTEM ||
-    this.location === ConfigGit.Location.LOCAL) {
+  if (this.scope === ConfigGit.Scope.GLOBAL || this.scope === ConfigGit.Scope.SYSTEM ||
+    this.scope === ConfigGit.Scope.LOCAL) {
 
     if (key) {
       this.commands.push(ConfigGit.Action.UNSET);
@@ -186,6 +186,6 @@ ConfigGit.prototype.unset = function(key, cb) {
 
     });
   } else {
-    cb(new Error("mismatch location and name"))
+    cb(new Error("mismatch scope and name"))
   }
 }
