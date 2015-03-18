@@ -8,7 +8,7 @@
 ## Install
 
 ```sh
-$ npm install --save config-git
+$ npm install --save git-scope-config
 ```
 
 
@@ -17,7 +17,7 @@ $ npm install --save config-git
 ### JavaScript
 
 ```js
-var configGit = require('config-git');
+var configGit = require('git-scope-config');
 
 configGit({scope: "global"}).set("github.user", "Yashprit Singh", function(err, data){
   console.log(data); //=> true
