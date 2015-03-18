@@ -1,6 +1,6 @@
 *work is still in progress*
 
-#  config-git [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+#  git-scope-config [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
 > read or set git config from various location like global, system, file, local
 
@@ -28,15 +28,15 @@ configGit({scope: "global"}).set("github.user", "Yashprit Singh", function(err, 
 ### Command Line reference 
 
 ```sh
-$ npm install --g config-git
-$ config-git --scope global --key github.user --value Yashprit Singh
+$ npm install --g git-scope-config
+$ git-scope-config --scope global --key github.user --value Yashprit Singh
 ```
 
 
 ## Methods
 
 ```js
-var configGit = require("config-git");
+var configGit = require("git-scope-config");
 configGit({
   scope: "global"
 })

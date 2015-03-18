@@ -1,5 +1,5 @@
 {
-  "name": "config-git",
+  "name": "git-scope-config",
   "version": "0.0.0alpha",
   "description": "read or set git config file",
   "bugs": {
@@ -16,10 +16,11 @@
   },
   "license": "MIT",
   "files": [
-    "lib/index.js",
+    "index.js",
     "cli.js"
   ],
   "keywords": [
+    "git-scope-config",
     "config-git",
     "git",
     "config",
@@ -39,6 +40,6 @@
     "test": "node test.js"
   },
   "bin": {
-    "config-git": "cli.js"
+    "git-scope-config": "cli.js"
   }
 }
