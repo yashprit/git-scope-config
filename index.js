@@ -94,6 +94,7 @@ ConfigGit.prototype.sync = function(path) {
  *
  */
 ConfigGit.prototype.get = function get(key, cb) {
+  var commandFrag = [];
   if (this.scope === ConfigGit.Scope.GLOBAL || this.scope === ConfigGit.Scope.SYSTEM ||
     this.scope === ConfigGit.Scope.LOCAL) {
 
@@ -103,9 +104,11 @@ ConfigGit.prototype.get = function get(key, cb) {
     }
 
 
-    this.commands.push(key);
-    var shellCommand = this.commands.join(" ");
+    commandFrag.push(key);
+    var shellCommand = this.commands.concat(commandFrag).join(" ");
+    console.log(shellCommand);
     execute(shellCommand, function(err, data) {
+      console.log(err, data);
       if (err) {
         cb(err);
       }
@@ -130,6 +133,7 @@ ConfigGit.prototype.get = function get(key, cb) {
  *
  */
 ConfigGit.prototype.set = function set(key, value, cb) {
+  var commandFrag = [];
 
   if (!(typeof key === "string" && typeof value === "string" && typeof cb === "function")) {
     cb(new Error("Wrong argument provided"));
@@ -138,10 +142,9 @@ ConfigGit.prototype.set = function set(key, value, cb) {
   if (this.scope === ConfigGit.Scope.GLOBAL || this.scope === ConfigGit.Scope.SYSTEM ||
     this.scope === ConfigGit.Scope.LOCAL) {
 
-    this.commands.push(key);
-    this.commands.push(value);
-    var shellCommand = this.commands.join(" ");
-
+    commandFrag.push(key);
+    commandFrag.push(value);
+    var shellCommand = this.commands.concat(commandFrag).join(" ");
     execute(shellCommand, function(err, data) {
       if (err) {
         cb(err);
@@ -159,6 +162,8 @@ ConfigGit.prototype.set = function set(key, value, cb) {
 
 ConfigGit.prototype.unset = function(key, cb) {
 
+  var commandFrag = [];
+
   if (typeof key === "function") {
     cb = key;
     key = null;
@@ -168,13 +173,13 @@ ConfigGit.prototype.unset = function(key, cb) {
     this.scope === ConfigGit.Scope.LOCAL) {
 
     if (key) {
-      this.commands.push(ConfigGit.Action.UNSET);
-      this.commands.push(key);
+      commandFrag.push(ConfigGit.Action.UNSET);
+      commandFrag.push(key);
     } else {
-      this.commands.push(ConfigGit.Action.UNSET_ALL);
+      commandFrag.push(ConfigGit.Action.UNSET_ALL);
     }
 
-    var shellCommand = this.commands.join(" ");
+    var shellCommand = this.commands.concat(commandFrag).join(" ");
     execute(shellCommand, function(err, data) {
       if (err) {
         cb(err);

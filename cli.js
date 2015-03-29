@@ -8,9 +8,18 @@ var
 
 var location = args.scope;
 var key = args.key;
+var value = args.value;
 
-configGit({
-  scope: location
-}).get(key, function(err, data) {
-  console.log(data);
-});
+if (value) {
+  configGit({
+    scope: location
+  }).set(key, value, function(err, data) {
+    console.log(data);
+  });
+} else {
+  configGit({
+    scope: location
+  }).get(key, function(err, data) {
+    console.log(data);
+  });
+}
