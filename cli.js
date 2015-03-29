@@ -2,8 +2,7 @@
 
 'use strict';
 
-var
-  args = require('minimist')(process.argv.slice(2)),
+var args = require('minimist')(process.argv.slice(2)),
   configGit = require('./');
 
 var location = args.scope;
