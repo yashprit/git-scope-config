@@ -1,5 +1,3 @@
-*work is still in progress*
-
 #  git-scope-config [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
 > read or set git config from various location like global, system, file, local
@@ -64,7 +62,7 @@ For bugs and feature requests, [please create an issue][issue-url].
 
 ## License
 
-MIT © [Yashprit](yashprit.github.io)
+MIT © [Yashprit](https://yashprit.github.io)
 
 [issue-url]: https://github.com/yashprit/config-git/issues
 [npm-url]: https://npmjs.org/package/config-git
