@@ -1,6 +1,6 @@
 {
   "name": "git-scope-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "read or set git config file",
   "bugs": {
     "url": "yashprit/config-git/issues"
@@ -8,11 +8,11 @@
   "author": {
     "url": "yashprit.github.io",
     "name": "Yashprit",
-    "email": "yashprit@gmail.com"
+    "email": "yashprit@yashprit.com"
   },
   "repository": {
     "type": "git",
-    "url": "yashprit/config-git"
+    "url": "yashprit/git-scope-config"
   },
   "license": "MIT",
   "files": [
@@ -34,7 +34,7 @@
     "minimist": "^1.1.1"
   },
   "devDependencies": {
-    "tape": "^3.5.0"
+    "tape": "^4.6.3"
   },
   "scripts": {
     "test": "node test.js"

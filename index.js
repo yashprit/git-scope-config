@@ -106,6 +106,7 @@ ConfigGit.prototype.get = function get(key, cb) {
 
     commandFrag.push(key);
     var shellCommand = this.commands.concat(commandFrag).join(" ");
+    console.log(shellCommand)
     execute(shellCommand, function(err, data) {
       if (err) {
         cb(err);
@@ -143,6 +144,7 @@ ConfigGit.prototype.set = function set(key, value, cb) {
     commandFrag.push(key);
     commandFrag.push(value);
     var shellCommand = this.commands.concat(commandFrag).join(" ");
+    console.log(shellCommand)
     execute(shellCommand, function(err, data) {
       if (err) {
         cb(err);
