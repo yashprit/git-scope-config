@@ -65,9 +65,9 @@ For bugs and feature requests, [please create an issue][issue-url].
 MIT © [Yashprit](https://yashprit.github.io)
 
 [issue-url]: https://github.com/yashprit/config-git/issues
-[npm-url]: https://npmjs.org/package/config-git
-[npm-image]: https://badge.fury.io/js/config-git.svg
-[travis-url]: https://travis-ci.org/yashprit/config-git
-[travis-image]: https://travis-ci.org/yashprit/config-git.svg?branch=master
-[daviddm-url]: https://david-dm.org/yashprit/config-git.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/yashprit/config-git
+[npm-url]: https://npmjs.org/package/git-scope-config
+[npm-image]: https://badge.fury.io/js/git-scope-config.svg
+[travis-url]: https://travis-ci.org/yashprit/git-scope-config
+[travis-image]: https://travis-ci.org/yashprit/git-scope-config.svg?branch=master
+[daviddm-url]: https://david-dm.org/yashprit/git-scope-config.svg?theme=shields.io
+[daviddm-image]: https://david-dm.org/yashprit/git-scope-config

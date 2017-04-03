@@ -1,6 +1,6 @@
 {
   "name": "git-scope-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "read or set git config file",
   "bugs": {
     "url": "yashprit/config-git/issues"
