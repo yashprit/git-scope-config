@@ -1,6 +1,6 @@
 'use strict';
 
-var exec = require("child_process").exec;
+var exec = require("shelljs").exec;
 
 module.exports = ConfigGit;
 
@@ -101,21 +101,20 @@ ConfigGit.prototype.get = function get(key, cb) {
     if (typeof key === "function") {
       cb = key
       key = ConfigGit.Action.GET_ALL;
+      commandFrag.push(key);
+    } else if (typeof key === 'string') {
+      commandFrag.push(ConfigGit.Action.GET);
+      commandFrag.push(key);
     }
 
 
-    commandFrag.push(key);
     var shellCommand = this.commands.concat(commandFrag).join(" ");
-    console.log(shellCommand)
-    execute(shellCommand, function(err, data) {
-      if (err) {
-        cb(err);
-      }
-
-      if (data) {
-        cb(null, data);
-      }
-    });
+    var code = execute(shellCommand);
+    if(code == 0) {
+      cb(null, data);
+    } else {
+      cb("no value found", null);
+    }
   } else {
     cb(new Error("mismatch scope and name"))
   }
@@ -144,7 +143,6 @@ ConfigGit.prototype.set = function set(key, value, cb) {
     commandFrag.push(key);
     commandFrag.push(value);
     var shellCommand = this.commands.concat(commandFrag).join(" ");
-    console.log(shellCommand)
     execute(shellCommand, function(err, data) {
       if (err) {
         cb(err);
