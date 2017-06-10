@@ -2,9 +2,6 @@
 
 var exec = require("shelljs").exec;
 
-module.exports = ConfigGit;
-
-
 var COMMAND_PREFIX = "git config";
 
 var configuration = {
@@ -109,9 +106,10 @@ ConfigGit.prototype.get = function get(key, cb) {
 
 
     var shellCommand = this.commands.concat(commandFrag).join(" ");
-    var code = execute(shellCommand);
-    if(code == 0) {
-      cb(null, data);
+    const { stdout, stderr, code } = exec(shellCommand, { silent: true })
+    console.log("code is ", stdout, stderr, code)
+    if(code == 0 || typeof code === 'undefined') {
+      cb(null, stdout);
     } else {
       cb("no value found", null);
     }
@@ -145,16 +143,16 @@ ConfigGit.prototype.set = function set(key, value, cb) {
     var shellCommand = this.commands.concat(commandFrag).join(" ");
     execute(shellCommand, function(err, data) {
       if (err) {
-        cb(err);
+        return cb(err);
       }
 
       if (data === "") {
-        cb(null, true);
+        return cb(null, true);
       }
 
     });
   } else {
-    cb(new Error("mismatch scope and name"))
+    return cb(new Error("mismatch scope and name"))
   }
 }
 
@@ -192,3 +190,5 @@ ConfigGit.prototype.unset = function(key, cb) {
     cb(new Error("mismatch scope and name"))
   }
 }
+
+module.exports = ConfigGit;
