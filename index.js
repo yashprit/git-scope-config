@@ -107,12 +107,7 @@ ConfigGit.prototype.get = function get(key, cb) {
 
     var shellCommand = this.commands.concat(commandFrag).join(" ");
     const { stdout, stderr, code } = exec(shellCommand, { silent: true })
-    console.log("code is ", stdout, stderr, code)
-    if(code == 0 || typeof code === 'undefined') {
-      cb(null, stdout);
-    } else {
-      cb("no value found", null);
-    }
+    cb(null, stdout);
   } else {
     cb(new Error("mismatch scope and name"))
   }
