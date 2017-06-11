@@ -19,7 +19,7 @@ test("can get key", function(t) {
     scope: "global"
   }).get("github.token", function(err, data) {
     t.ok(!err, 'Get should not have any error');
-    t.equal(data, "yashp\n", "Get should give you output");
+    t.equal(data, "yashp", "Get should give you output");
     t.end();
   });
 });
