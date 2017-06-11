@@ -104,10 +104,10 @@ ConfigGit.prototype.get = function get(key, cb) {
       commandFrag.push(key);
     }
 
-
     var shellCommand = this.commands.concat(commandFrag).join(" ");
-    const { stdout, stderr, code } = exec(shellCommand, { silent: true })
-    cb(null, stdout);
+    const { stdout, stderr, code } = exec(shellCommand, { silent: true });
+    const output = stdout.replace("\n", "");
+    cb(null, output);
   } else {
     cb(new Error("mismatch scope and name"))
   }
